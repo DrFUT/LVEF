@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import os from 'node:os';
 import fs from 'node:fs/promises';
 import path from 'node:path';
+import { spawnSync } from 'node:child_process';
 
 test('validation adapter captures command evidence and classifies failures', async () => {
   const { runValidation } = await import('../src/adapters/validation.js');
@@ -21,7 +22,10 @@ test('git adapter reports the current worktree without mutating it', async () =>
 
 test('git checkpoint refuses an unrelated Lumora remote', async () => {
   const { checkpointGit } = await import('../src/adapters/git.js');
-  const result = await checkpointGit(process.cwd(), { message: 'test checkpoint', remote: 'origin' });
+  const root = await fs.mkdtemp(path.join(os.tmpdir(), 'lvef-git-'));
+  spawnSync('git', ['init', '-b', 'main'], { cwd: root, stdio: 'ignore' });
+  spawnSync('git', ['remote', 'add', 'origin', 'https://github.com/DrFUT/Lumora.git'], { cwd: root, stdio: 'ignore' });
+  const result = await checkpointGit(root, { message: 'test checkpoint', remote: 'origin' });
   assert.equal(result.status, 'BLOCKED');
   assert.match(result.reason, /remote|LVEF|Lumora/i);
 });
