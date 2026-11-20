@@ -1,0 +1,18 @@
+{
+  "id": "fixture-web",
+  "name": "LVEF Independent Web Fixture",
+  "root": ".",
+  "preview": {
+    "command": "node server.mjs --port 18901",
+    "healthUrl": "http://127.0.0.1:18901/health",
+    "startupTimeoutMs": 5000
+  },
+  "screenshot": {
+    "type": "browser",
+    "engine": "playwright",
+    "url": "http://127.0.0.1:18901/"
+  },
+  "validation": [
+    { "name": "fixture-check", "command": "node --check server.mjs" }
+  ]
+}

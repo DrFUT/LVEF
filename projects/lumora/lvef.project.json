@@ -1,0 +1,18 @@
+{
+  "id": "lumora",
+  "name": "Lumora",
+  "root": "../../../..",
+  "preview": {
+    "command": "npm run tauri dev",
+    "healthUrl": "http://127.0.0.1:1420/",
+    "startupTimeoutMs": 30000
+  },
+  "screenshot": {
+    "type": "desktop-window",
+    "title": "Lumora"
+  },
+  "validation": [
+    { "name": "node-tests", "command": "npm test" },
+    { "name": "rust-check", "command": "cargo check --manifest-path src-tauri/Cargo.toml" }
+  ]
+}

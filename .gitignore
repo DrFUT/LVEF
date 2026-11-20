@@ -1,0 +1,4 @@
+.lvef/
+node_modules/
+coverage/
+*.log

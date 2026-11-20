@@ -1,0 +1,20 @@
+{
+  "name": "lvef",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Lumora Visual Engineering Framework",
+  "type": "module",
+  "bin": {
+    "lvef": "src/cli.js"
+  },
+  "scripts": {
+    "test": "node --test",
+    "start": "node src/cli.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.64.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
