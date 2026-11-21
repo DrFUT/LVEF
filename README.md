@@ -4,12 +4,14 @@ Lumora Visual Engineering Framework is a small, independent CLI for the loop:
 
 `modify → preview → capture evidence → validate → checkpoint`
 
-It is implemented as a standalone project under `Engineering/LVEF`; it does not import Lumora business modules. The core uses Node.js built-ins and JSON project configuration. Optional Playwright support captures browser pages. Windows desktop capture uses a PowerShell/Win32 adapter and reports `BLOCKED` when no real target window can be found.
+It is an independent Git project at `D:\Engineering\LVEF`; it does not import Lumora business modules. The core uses Node.js built-ins and JSON project configuration. Optional Playwright support captures browser pages. Windows desktop capture uses a PowerShell/Win32 adapter and reports `BLOCKED` when no real target window can be found.
 
 ## Quick start
 
 ```powershell
-cd D:\MyCinema\Engineering\LVEF
+cd D:\Engineering\LVEF
+npm ci
+npx playwright install chromium
 node src/cli.js inspect --project projects/fixture-web
 node src/cli.js run --project projects/fixture-web --workspace projects/fixture-web
 node --test
@@ -20,6 +22,8 @@ Each run writes `.lvef/runs/<run-id>/report.json`. A report includes per-step st
 ## Project configuration
 
 `lvef.project.json` accepts `id`, `name`, `root`, a `preview` object (`command`, `healthUrl`, optional `startupTimeoutMs`), an optional `screenshot` object, and a `validation` array of `{name, command, cwd?, timeoutMs?}` entries. `root` is resolved relative to the configuration directory.
+
+The Lumora example targets the external checkout at `D:/MyCinema`. Change its `root` for another machine. Its configured npm commands remain unverified for the current product checkout; see the Stage 7 report.
 
 ## Commands
 
